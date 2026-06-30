@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{6E2BB64764E3BE9B}Prefabs/Characters/Core/DefaultPlayerController.et"
+ Configurations {
+  ENTResourceClass PC {
+  }
+  ENTResourceClass XBOX_ONE : PC {
+  }
+  ENTResourceClass XBOX_SERIES : PC {
+  }
+  ENTResourceClass PS4 : PC {
+  }
+  ENTResourceClass PS5 : PC {
+  }
+  ENTResourceClass HEADLESS : PC {
+  }
+ }
+}
