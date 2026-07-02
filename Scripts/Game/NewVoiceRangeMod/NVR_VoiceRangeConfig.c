@@ -1,7 +1,7 @@
 class NVR_VoiceRangeConfig
 {
 	static const int RANGE_COUNT = 5;
-	static const int DEFAULT_RANGE_INDEX = 2;
+	static const int DEFAULT_RANGE_INDEX = 4;
 
 	static const string ACTION_INCREASE = "NVRVoiceRangeIncrease";
 	static const string ACTION_DECREASE = "NVRVoiceRangeDecrease";
