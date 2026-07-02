@@ -1,7 +1,7 @@
 SCR_PlayerController {
  ID "1A9BA6BEFA06E3B1"
  components +{
-  SoundOutputStateComponent "{72A331E1AB7C4321}" {
+  SoundOutputStateComponent "{72A331E1AB7C4322}" {
   }
  }
 }

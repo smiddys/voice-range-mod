@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{777FDED062C135F3}Scripts/Game/VoiceRangeMod/UI/layouts/VoiceRange/VoiceLayout.layout"
+ Name "{72A331E1AB7C4003}UI/layouts/NewVoiceRange/NVR_VoiceRangeHud.layout"
  Configurations {
   LayoutResourceClass PC {
   }

@@ -1,0 +1,21 @@
+FrameWidgetClass {
+ Name "NVR_VoiceRangeRoot"
+ {
+  TextWidgetClass "{72A331E1AB7C4201}" {
+   Name "NVR_RangeText"
+   Slot FrameWidgetSlot "{72A331E1AB7C4202}" {
+    PositionX 16
+    OffsetLeft 16
+    PositionY 405
+    OffsetTop 405
+    SizeX 72
+    OffsetRight -88
+    SizeY 28
+    OffsetBottom -433
+   }
+   Text "30m"
+   "Font Size" 22
+   "Min Font Size" 18
+  }
+ }
+}

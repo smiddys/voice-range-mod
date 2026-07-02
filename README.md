@@ -1,37 +1,24 @@
-# Voice Range Mod for Arma Reforger
+# NEW VOICE RANGE MOD
 
-An Arma Reforger / Enfusion Workbench mod project for a selectable proximity VOIP range system.
+Variable proximity voice range for Arma Reforger.
 
-This project does not modify radio range. The installed public script API exposes radio range through `BaseTransceiver.SetRange(float)`, but direct proximity speech is handled by `VoNComponent` and does not expose a public distance/range setter in the installed API docs.
+## Features
 
-## Files
+- Player-selectable proximity VOIP ranges: 5 m, 15 m, 30 m, 45 m, 60 m.
+- Rebindable increase/decrease controls.
+- Default keyboard controls: F3 decreases range, F4 increases range, F5 toggles the range HUD.
+- Controls should appear in Settings > Controls under "Voice Range Settings".
+- Default controller controls: right shoulder + D-pad down decreases range, right shoulder + D-pad up increases range, right shoulder + D-pad right toggles HUD visibility.
+- Controls category: Voice Range Settings.
+- Persistent left-middle HUD range indicator.
+- Multiplayer range state replication hook for real proximity voice filtering.
 
-- `VoiceRangeMod.gproj` - Arma Reforger Workbench project file.
-- `Scripts/Game/VoiceRangeMod/VRM_VoiceRangeConfig.c` - the allowed proximity VOIP ranges.
-- `Scripts/Game/VoiceRangeMod/VRM_VoiceRangeManager.c` - tracks the selected proximity VOIP range.
-- `Scripts/Game/VoiceRangeMod/VRM_VoiceRangeBootstrap.c` - hooks `SCR_VONController.SetEntryActive`.
-- `Scripts/Game/VoiceRangeMod/VRM_VoNComponent.c` - receiver-side direct VOIP distance filter prototype.
-- `Configs/VoiceRangeMod.conf` - human-readable tuning values.
+## Workbench Validation
 
-## Ranges
+Open this project in Workbench, run Script Editor validation, then check these assets:
 
-Players should be able to select one of these direct proximity VOIP ranges:
+- `Configs/System/chimeraInputCommon.conf`
+- `Configs/System/keyBindingMenu.conf`
+- `Scripts/Game/NewVoiceRangeMod`
 
-- 5 m
-- 15 m
-- 30 m
-- 45 m
-- 60 m
-
-Default: 30 m
-
-## Workbench Steps
-
-1. Open Arma Reforger Tools.
-2. Open this folder as a project using `VoiceRangeMod.gproj`.
-3. Compile scripts.
-4. Package and publish through Workbench.
-
-## Important
-
-This must use the game's normal proximity VOIP chat, not radios. The current prototype filters direct VOIP in `SCR_VoNComponent.OnReceive()` by comparing listener distance to the speaker's selected range. Workbench/in-game testing is needed to confirm whether returning before `super.OnReceive()` fully suppresses playback.
+The gameplay hook is intentionally isolated in `NVR_VONRangePatch.c`. If the current game build exposes a different VON distance method name, update only that file.
