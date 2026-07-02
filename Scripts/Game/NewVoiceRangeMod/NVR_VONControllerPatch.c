@@ -45,7 +45,7 @@ modded class SCR_VONController
 		m_NVR_InputManager.AddActionListener(NVR_VoiceRangeConfig.ACTION_DECREASE_OLD, EActionTrigger.DOWN, NVR_OnDecreaseVoiceRange);
 		m_NVR_InputManager.AddActionListener(NVR_VoiceRangeConfig.ACTION_TOGGLE_HUD_OLD, EActionTrigger.DOWN, NVR_OnToggleVoiceRangeHud);
 
-		Print(string.Format("%1 build 1.0.24 vanilla-60m-filtered-ranges build loaded; registered F3/F4/F5 voice range controls.", NVR_VoiceRangeConfig.LOG_PREFIX));
+		Print(string.Format("%1 build 1.0.25 audio-component-ranges build loaded; registered F3/F4/F5 voice range controls.", NVR_VoiceRangeConfig.LOG_PREFIX));
 
 		NVR_VoiceRangeHud.Ensure();
 		NVR_VoiceRangeNetwork.PublishLocalRange();
@@ -150,7 +150,7 @@ modded class SCR_VONController
 		if (!controlledEntity)
 			return;
 
-		SCR_VoNComponent vonComponent = NVR_FindMaxRangeVoiceComponent(controlledEntity);
+		SCR_VoNComponent vonComponent = NVR_FindSelectedVoiceRangeComponent(controlledEntity);
 		if (!vonComponent)
 		{
 			Print(string.Format("%1 no SCR_VoNComponent found on controlled character %2.", NVR_VoiceRangeConfig.LOG_PREFIX, controlledEntity), LogLevel.WARNING);
@@ -186,13 +186,26 @@ modded class SCR_VONController
 		}
 
 		if (m_VONComp == vonComponent)
-			Print(string.Format("%1 max proximity VON component active; selected filter range is %2.", NVR_VoiceRangeConfig.LOG_PREFIX, NVR_VoiceRangeState.GetLocalRangeLabel()));
+			Print(string.Format("%1 proximity VON audio component active for %2.", NVR_VoiceRangeConfig.LOG_PREFIX, NVR_VoiceRangeState.GetLocalRangeLabel()));
 		else
-			Print(string.Format("%1 tried to set max proximity VON component for %2, but active component did not match.", NVR_VoiceRangeConfig.LOG_PREFIX, NVR_VoiceRangeState.GetLocalRangeLabel()), LogLevel.WARNING);
+			Print(string.Format("%1 tried to set proximity VON audio component for %2, but active component did not match.", NVR_VoiceRangeConfig.LOG_PREFIX, NVR_VoiceRangeState.GetLocalRangeLabel()), LogLevel.WARNING);
 	}
 
-	protected SCR_VoNComponent NVR_FindMaxRangeVoiceComponent(IEntity entity)
+	protected SCR_VoNComponent NVR_FindSelectedVoiceRangeComponent(IEntity entity)
 	{
+		int rangeIndex = NVR_VoiceRangeState.GetLocalRangeIndex();
+		switch (rangeIndex)
+		{
+			case 0:
+				return SCR_VoNComponent.Cast(entity.FindComponent(NVR_VoNRange5Component));
+			case 1:
+				return SCR_VoNComponent.Cast(entity.FindComponent(NVR_VoNRange15Component));
+			case 2:
+				return SCR_VoNComponent.Cast(entity.FindComponent(NVR_VoNRange30Component));
+			case 3:
+				return SCR_VoNComponent.Cast(entity.FindComponent(NVR_VoNRange45Component));
+		}
+
 		return SCR_VoNComponent.Cast(entity.FindComponent(SCR_VoNComponent));
 	}
 

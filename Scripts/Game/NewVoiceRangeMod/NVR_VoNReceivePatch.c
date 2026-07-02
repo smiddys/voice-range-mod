@@ -30,11 +30,18 @@ modded class SCR_VoNComponent
 			return true;
 
 		NVR_VoiceRangeRepComponent rangeComponent = NVR_VoiceRangeRepComponent.Cast(speaker.FindComponent(NVR_VoiceRangeRepComponent));
+		int rangeIndex = NVR_VoiceRangeConfig.DEFAULT_RANGE_INDEX;
 		int rangeMeters = NVR_VoiceRangeConfig.GetRangeMeters(NVR_VoiceRangeConfig.DEFAULT_RANGE_INDEX);
 		if (rangeComponent)
+		{
+			rangeIndex = rangeComponent.GetRangeIndex();
 			rangeMeters = rangeComponent.GetRangeMeters();
+		}
 		else
 			rangeMeters = NVR_VoiceRangeState.GetPlayerRangeMeters(playerId);
+
+		if (rangeIndex >= NVR_VoiceRangeConfig.RANGE_COUNT - 1)
+			return true;
 
 		float distance = vector.Distance(listener.GetOrigin(), speaker.GetOrigin());
 		bool inRange = distance <= rangeMeters;
