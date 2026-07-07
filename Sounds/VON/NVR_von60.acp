@@ -716,7 +716,7 @@ AudioClass {
    tl 0 -1072
    ctl 0 -21
    curve "1/r"
-   outerRange 60
+   outerRange 68
    slopeFactor 8
   }
  }

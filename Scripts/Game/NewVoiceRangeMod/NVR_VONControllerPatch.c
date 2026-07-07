@@ -45,7 +45,7 @@ modded class SCR_VONController
 		m_NVR_InputManager.AddActionListener(NVR_VoiceRangeConfig.ACTION_DECREASE_OLD, EActionTrigger.DOWN, NVR_OnDecreaseVoiceRange);
 		m_NVR_InputManager.AddActionListener(NVR_VoiceRangeConfig.ACTION_TOGGLE_HUD_OLD, EActionTrigger.DOWN, NVR_OnToggleVoiceRangeHud);
 
-		Print(string.Format("%1 build 1.0.25 audio-component-ranges build loaded; registered F3/F4/F5 voice range controls.", NVR_VoiceRangeConfig.LOG_PREFIX));
+		Print(string.Format("%1 build 1.0.31 fixed-vanilla-loud-guid build loaded; registered F3/F4/F5 voice range controls.", NVR_VoiceRangeConfig.LOG_PREFIX));
 
 		NVR_VoiceRangeHud.Ensure();
 		NVR_VoiceRangeNetwork.PublishLocalRange();
@@ -199,14 +199,12 @@ modded class SCR_VONController
 			case 0:
 				return SCR_VoNComponent.Cast(entity.FindComponent(NVR_VoNRange5Component));
 			case 1:
-				return SCR_VoNComponent.Cast(entity.FindComponent(NVR_VoNRange15Component));
-			case 2:
 				return SCR_VoNComponent.Cast(entity.FindComponent(NVR_VoNRange30Component));
-			case 3:
-				return SCR_VoNComponent.Cast(entity.FindComponent(NVR_VoNRange45Component));
+			case 2:
+				return SCR_VoNComponent.Cast(entity.FindComponent(NVR_VoNRange60Component));
 		}
 
-		return SCR_VoNComponent.Cast(entity.FindComponent(SCR_VoNComponent));
+		return null;
 	}
 
 	override void OnDelete(IEntity owner)
